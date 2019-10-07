@@ -1,0 +1,22 @@
+{:duct.profile/base
+ {:duct.core/project-ns demo
+
+  ;; Middlewares
+  :demo.middleware/exception-handler {}
+
+  ;; Handlers
+  :demo.handler.throw-exception/not-found {}
+  :demo.handler.throw-exception/server-error {}}
+
+ :duct.profile/dev   #duct/include "dev"
+ :duct.profile/local #duct/include "local"
+ :duct.profile/prod  {}
+
+ :duct.module/ataraxy
+ {"/" ^:exception-handler
+  {"not-found" [:throw-exception/not-found]
+   "server-error" [:throw-exception/server-error]}}
+
+ :duct.module/logging {}
+ :duct.module.web/api
+ {}}
